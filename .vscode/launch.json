@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-GoBarberApplication<GoBarber>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "br.com.ufc.GoBarber.GoBarberApplication",
+      "projectName": "GoBarber",
+      "args": ""
+    }
+  ]
+}
