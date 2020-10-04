@@ -1,3 +1,5 @@
-/home/leonardo/Documents/Code/GoBarber/src/main/java/br/com/ufc/GoBarber/Model/User.java
-/home/leonardo/Documents/Code/GoBarber/src/main/java/br/com/ufc/GoBarber/Controller/Teste.java
+/home/leonardo/Documents/Code/GoBarber/src/main/java/br/com/ufc/GoBarber/Services/CreateUserService.java
+/home/leonardo/Documents/Code/GoBarber/src/main/java/br/com/ufc/GoBarber/Controllers/UsersController.java
+/home/leonardo/Documents/Code/GoBarber/src/main/java/br/com/ufc/GoBarber/Models/Users.java
+/home/leonardo/Documents/Code/GoBarber/src/main/java/br/com/ufc/GoBarber/Repositories/UsersRepository.java
 /home/leonardo/Documents/Code/GoBarber/src/main/java/br/com/ufc/GoBarber/GoBarberApplication.java
