@@ -12,7 +12,7 @@ import br.com.ufc.GoBarber.Repositories.UsersRepository;
 public class CreateUserService {
 
   @Autowired
-  private UsersRepository userRepo;
+  private UsersRepository usersRepo;
 
   public Users execute(String name, String email, String password, String avatar) {
     // try {
@@ -20,7 +20,7 @@ public class CreateUserService {
     // // throw new Exception("Cannot create an user with empty values!");
     // // }
 
-    // Users emailExists = userRepo.findByEmail(email);
+    // Users emailExists = usersRepo.findByEmail(email);
 
     // if (emailExists.getEmail().equals(email)) {
     // throw new UserAlreadyExistsException("User already exists!");
@@ -29,7 +29,7 @@ public class CreateUserService {
     String encryptedPassword = new BCryptPasswordEncoder().encode(password);
     Users user = new Users(name, email, encryptedPassword, avatar);
 
-    Users createdUser = userRepo.save(user);
+    Users createdUser = usersRepo.save(user);
 
     return createdUser;
     // } catch (UserAlreadyExistsException err) {
