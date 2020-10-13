@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.ufc.GoBarber.Errors.UserAlreadyExistsException;
+import br.com.ufc.GoBarber.DTO.CreateUserDTO;
 import br.com.ufc.GoBarber.Models.Users;
 import br.com.ufc.GoBarber.Repositories.UsersRepository;
 
@@ -14,27 +14,27 @@ public class CreateUserService {
   @Autowired
   private UsersRepository usersRepo;
 
-  public Users execute(String name, String email, String password, String avatar) {
-    // try {
-    // // if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-    // // throw new Exception("Cannot create an user with empty values!");
-    // // }
+  public Users execute(CreateUserDTO user) {
+    if (user.getName().isEmpty() || user.getEmail().isEmpty() || user.getPassword().isEmpty()) {
+      return null;
+    }
 
-    // Users emailExists = usersRepo.findByEmail(email);
+    Users emailExists = usersRepo.findByEmail(user.getEmail());
 
-    // if (emailExists.getEmail().equals(email)) {
-    // throw new UserAlreadyExistsException("User already exists!");
-    // }
+    if (emailExists.getEmail().equals(user.getEmail())) {
+      return null;
+    }
 
-    String encryptedPassword = new BCryptPasswordEncoder().encode(password);
-    Users user = new Users(name, email, encryptedPassword, avatar);
+    if (user.getPassword().length() < 6) {
+      return null;
+    }
 
-    Users createdUser = usersRepo.save(user);
+    String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+    Users newUser = new Users(user.getName(), user.getEmail(), encryptedPassword, user.getAvatar(),
+        user.getIsProvider());
+
+    Users createdUser = usersRepo.save(newUser);
 
     return createdUser;
-    // } catch (UserAlreadyExistsException err) {
-    // System.out.println("Message: " + err.getMessage());
-    // }
-    // return null;
   }
 }

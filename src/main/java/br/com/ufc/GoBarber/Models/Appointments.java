@@ -27,13 +27,20 @@ public class Appointments {
   private UUID id;
 
   @Column(name = "date", nullable = false)
+  @DateTimeFormat(pattern = "dd/MM/yyyy hh:MM")
   @Temporal(TemporalType.TIMESTAMP)
-  @DateTimeFormat(pattern = "dd/MM/yyyy hh:MM:ss")
   private Date date;
 
-  // @Column(name = "provider_id", nullable = false)
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Users.class)
-  private UUID provider;
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Users.class)
+  private Users provider;
+
+  public Appointments() {
+  }
+
+  public Appointments(Date date, Users provider) {
+    this.date = date;
+    this.provider = provider;
+  }
 
   public UUID getId() {
     return id;
@@ -51,11 +58,11 @@ public class Appointments {
     this.date = date;
   }
 
-  public UUID getProvider() {
+  public Users getProvider() {
     return provider;
   }
 
-  public void setProvider(UUID provider) {
+  public void setProvider(Users provider) {
     this.provider = provider;
   }
 }

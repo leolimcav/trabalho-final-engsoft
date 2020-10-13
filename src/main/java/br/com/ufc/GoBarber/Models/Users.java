@@ -31,14 +31,18 @@ public class Users {
   @Column(name = "avatar", nullable = true)
   private String avatar;
 
+  @Column(name = "isProvider")
+  private boolean isProvider;
+
   public Users() {
   }
 
-  public Users(String name, String email, String password, String avatar) {
+  public Users(String name, String email, String password, String avatar, boolean isProvider) {
     this.name = name;
     this.email = email;
     this.password = password;
     this.avatar = avatar;
+    this.isProvider = isProvider;
   }
 
   public UUID getId() {
@@ -79,5 +83,13 @@ public class Users {
 
   public void setAvatar(String avatar) {
     this.avatar = avatar;
+  }
+
+  public boolean getIsProvider() {
+    return this.isProvider;
+  }
+
+  public void setIsProvider(boolean isProvider) {
+    this.isProvider = isProvider;
   }
 }
