@@ -20,24 +20,16 @@ public class UpdateUserService {
   private UsersRepository usersRepo;
 
   public Users execute(UUID userId, CreateUserDTO user) {
-    // try {
     Users userExists = usersRepo.getOne(userId);
-
-    // if (userExists.equals(null)) {
-    // throw new EntityNotFoundException("User ID not found!");
-    // }
 
     userExists.setName(user.getName());
     userExists.setEmail(user.getEmail());
     userExists.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
     userExists.setAvatar(user.getAvatar());
+    userExists.setIsProvider(user.getIsProvider());
 
     Users updatedUser = usersRepo.saveAndFlush(userExists);
 
     return updatedUser;
-    // } catch (Exception ex) {
-    // System.out.println(ex.getMessage());
-    // }
-    // return null;
   }
 }

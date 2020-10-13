@@ -39,7 +39,8 @@ public class UsersController {
   @GetMapping("/{userId}")
   public ResponseEntity<ResponseUserDTO> show(@PathVariable UUID userId) {
     Users user = usersRepo.getOne(userId);
-    ResponseUserDTO response = new ResponseUserDTO(user.getId(), user.getName(), user.getEmail(), user.getAvatar());
+    ResponseUserDTO response = new ResponseUserDTO(user.getId(), user.getName(), user.getEmail(), user.getAvatar(),
+        user.getIsProvider());
 
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
@@ -49,7 +50,8 @@ public class UsersController {
     List<Users> users = usersRepo.findAll();
     List<ResponseUserDTO> response = new ArrayList<>();
     users.forEach(user -> {
-      response.add(new ResponseUserDTO(user.getId(), user.getName(), user.getEmail(), user.getAvatar()));
+      response.add(
+          new ResponseUserDTO(user.getId(), user.getName(), user.getEmail(), user.getAvatar(), user.getIsProvider()));
     });
 
     return new ResponseEntity<>(response, HttpStatus.OK);
@@ -57,10 +59,9 @@ public class UsersController {
 
   @PostMapping
   public ResponseEntity<ResponseUserDTO> create(@RequestBody CreateUserDTO user) {
-    Users createdUser = createUserService.execute(user.getName(), user.getEmail(), user.getPassword(),
-        user.getAvatar());
+    Users createdUser = createUserService.execute(user);
     ResponseUserDTO response = new ResponseUserDTO(createdUser.getId(), createdUser.getName(), createdUser.getEmail(),
-        createdUser.getAvatar());
+        createdUser.getAvatar(), user.getIsProvider());
     return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
 
@@ -69,7 +70,7 @@ public class UsersController {
     Users updatedUser = updateUserService.execute(userId, user);
 
     ResponseUserDTO response = new ResponseUserDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getEmail(),
-        updatedUser.getAvatar());
+        updatedUser.getAvatar(), user.getIsProvider());
     return new ResponseEntity<ResponseUserDTO>(response, HttpStatus.OK);
   }
 

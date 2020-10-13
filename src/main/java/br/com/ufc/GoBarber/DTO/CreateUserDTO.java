@@ -5,6 +5,7 @@ public class CreateUserDTO {
   private String email;
   private String password;
   private String avatar;
+  private boolean isProvider;
 
   public String getName() {
     return name;
@@ -36,5 +37,13 @@ public class CreateUserDTO {
 
   public void setAvatar(String avatar) {
     this.avatar = avatar;
+  }
+
+  public boolean getIsProvider() {
+    return this.isProvider;
+  }
+
+  public void setIsProvider(boolean isProvider) {
+    this.isProvider = isProvider;
   }
 }
